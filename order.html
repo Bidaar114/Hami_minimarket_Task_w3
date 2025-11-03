@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hami Minimarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+
+
+<header class="order_nav">
+<div class="brand">Hami MiniMarket</div>
+<div class="links">
+<a class="back" href="index.html">Back to Shop</a>
+</div>
+</header>
+
+
+<main class="container order-page">
+<h1>Order Summary</h1>
+<div id="summary-list"></div>
+<div class="order-totals">
+<div>Subtotal: $<span id="o-subtotal">0.00</span></div>
+<div>Tax (5%): $<span id="o-tax">0.00</span></div>
+<div>Discount: $<span id="o-discount">0.00</span></div>
+
+</div>
+<div class="final">Final Total: $<span id="o-total">0.00</span></div>
+<button id="o-confirm">Confirm Order</button>
+</main>
+
+<script type="module">
+
+import { loadCart } from './js/storage.js';
+
+
+const TAX_RATE = 0.05;
+const DISCOUNT_THRESHOLD = 50; // $50
+const DISCOUNT_RATE = 0.10; // 10%
+
+
+function format(n){ return n.toFixed(2); }
+const cart = loadCart();
+const summaryList = document.getElementById('summary-list');
+const oSubtotal = document.getElementById('o-subtotal');
+const oTax = document.getElementById('o-tax');
+const oTotal = document.getElementById('o-total');
+const oDiscount = document.getElementById('o-discount');
+
+
+if(!cart || cart.items.length === 0){
+summaryList.innerHTML = '<p>Your cart is empty.</p>';
+} else {
+const ul = document.createElement('ul');
+cart.items.forEach(item => {
+const li = document.createElement('li');
+li.innerHTML = `<img src= ${item.img}> ${item.name} — ${item.qty} × $${format(item.price)} = $${format(item.price * item.qty)}`;
+ul.appendChild(li);
+});
+summaryList.appendChild(ul);
+
+
+const subtotal = cart.items.reduce((s,i)=> s + i.price * i.qty, 0);
+const tax = subtotal * TAX_RATE;
+let discount = 0;
+if(subtotal > DISCOUNT_THRESHOLD) discount = subtotal * DISCOUNT_RATE;
+const total = subtotal + tax - discount;
+
+
+oSubtotal.textContent = format(subtotal);
+oTax.textContent = format(tax);
+oDiscount.textContent = format(discount);
+oTotal.textContent = format(total);
+}
+
+document.getElementById('o-confirm').addEventListener('click', ()=>{
+alert('Order confirmed (demo). Thank you!');
+localStorage.removeItem('hami_cart');
+window.location.href = 'index.html';
+});
+
+</script>
+
+</body>
+</html>
