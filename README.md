@@ -29,7 +29,7 @@ This project was created as part of an **internship program** to demonstrate bas
 |-------------|----------|
 | **HTML5** | Structure of the web pages |
 | **CSS3** | Styling and layout design |
-| **JavaScript** | Adds interactivity and dynamic behavior |
+| **Modular JavaScript** | Adds interactivity and dynamic behavior |
 
 ---
 

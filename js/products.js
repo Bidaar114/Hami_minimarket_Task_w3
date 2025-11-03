@@ -2,7 +2,7 @@
 
 export const PRODUCTS =  [
 
-    {id: 1, name: "Pomegranatee",  price: 5, category: "Fruit", img: "../assets/images/beytraf.png" },
+    {id: 1, name: "Granate",  price: 5, category: "Fruit", img: "../assets/images/beytraf.png" },
     {id: 2, name: "Banana",        price: 3, category: "Fruit", img: "../assets/images/banana.png" },
     {id: 3, name: "Orange",        price: 6, category: "Fruit", img: "../assets/images/orange.png" },
     {id : 4,name: "Grapes",        price: 9, category: "Fruit", img: "../assets/images/grapes.png" },
